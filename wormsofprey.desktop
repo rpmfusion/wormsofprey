@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Wörms of Prey
+Comment=Team based bomb / scorched like game
+Exec=wormsofprey
+Icon=wormsofprey
+Terminal=false
+Type=Application
+Categories=Game;ArcadeGame;StrategyGame;
