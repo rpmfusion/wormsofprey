@@ -1,6 +1,6 @@
 Name:           wormsofprey
 Version:        0.4.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Team based bomb / scorched like game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -85,6 +85,9 @@ fi
 
 
 %changelog
+* Fri Jul 25 2008 Hans de Goede <j.w.r.degoede@hhs.nl> 0.4.3-3
+- Release bump for rpmfusion
+
 * Thu Mar 20 2008 Hans de Goede <j.w.r.degoede@hhs.nl> 0.4.3-2%{?dist}
 - Fix building with gcc 4.3
 
