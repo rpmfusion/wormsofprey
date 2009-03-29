@@ -1,6 +1,6 @@
 Name:           wormsofprey
 Version:        0.4.3
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Team based bomb / scorched like game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -85,6 +85,9 @@ fi
 
 
 %changelog
+* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.4.3-4
+- rebuild for new F11 features
+
 * Fri Jul 25 2008 Hans de Goede <j.w.r.degoede@hhs.nl> 0.4.3-3
 - Release bump for rpmfusion
 
