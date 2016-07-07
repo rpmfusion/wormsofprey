@@ -1,6 +1,6 @@
 Name:           wormsofprey
 Version:        0.4.3
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Team based bomb / scorched like game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -9,7 +9,7 @@ Source0:        http://wormsofprey.org/download/wop-%{version}-src.tar.bz2
 Source1:        %{name}.desktop
 Source2:        %{name}.png
 Patch0:         wop-0.4.3-gcc43.patch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Patch1:         wop-0.4.3-gcc6.patch
 BuildRequires:  SDL_image-devel SDL_mixer-devel SDL_net-devel SDL_ttf-devel
 BuildRequires:  zlib-devel imake desktop-file-utils
 Requires:       %{name}-data >= 20051221
@@ -26,6 +26,7 @@ and Multiple moving goals.
 %prep
 %setup -q -n wop-%{version}
 %patch0 -p1
+%patch1 -p1
 sed -i 's|^CXXFLAGS ?= .*|CXXFLAGS ?= %{optflags}|' sdlwidgets/Makefile \
   src/Makefile
 sed -i 's|data = ./data|data = %{_datadir}/%{name}|' woprc
@@ -40,7 +41,6 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}
 mkdir -p $RPM_BUILD_ROOT/%{_bindir}
 mkdir -p $RPM_BUILD_ROOT/%{_datadir}/%{name}
@@ -57,25 +57,20 @@ install -p -m 644 %{SOURCE2} \
   $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/16x16/apps
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-
 %post
-touch --no-create %{_datadir}/icons/hicolor || :
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
-touch --no-create %{_datadir}/icons/hicolor || :
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS ChangeLog COPYING README README-COMMAND-LINE-OPTIONS.txt REVIEWS
 %config(noreplace) %{_sysconfdir}/woprc
 %{_bindir}/%{name}
@@ -85,6 +80,9 @@ fi
 
 
 %changelog
+* Thu Jul  7 2016 Hans de Goede <j.w.r.degoede@gmail.com> - 0.4.3-10
+- Fix building with gcc6 / fix FTBFS
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 0.4.3-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
