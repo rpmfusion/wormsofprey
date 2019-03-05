@@ -11,7 +11,7 @@ Source2:        %{name}.png
 Patch0:         wop-0.4.3-gcc43.patch
 Patch1:         wop-0.4.3-gcc6.patch
 BuildRequires:  SDL_image-devel SDL_mixer-devel SDL_net-devel SDL_ttf-devel
-BuildRequires:  zlib-devel imake desktop-file-utils
+BuildRequires:  zlib-devel imake desktop-file-utils gcc-c++
 Requires:       %{name}-data >= 20051221
 
 %description
