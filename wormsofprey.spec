@@ -1,6 +1,6 @@
 Name:           wormsofprey
 Version:        0.4.3
-Release:        23%{?dist}
+Release:        24%{?dist}
 Summary:        Team based bomb / scorched like game
 Group:          Amusements/Games
 License:        GPLv2+
@@ -80,6 +80,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed Aug 02 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.4.3-24
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
+
 * Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.4.3-23
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
