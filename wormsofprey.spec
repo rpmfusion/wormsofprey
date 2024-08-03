@@ -25,8 +25,8 @@ and Multiple moving goals.
 
 %prep
 %setup -q -n wop-%{version}
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 sed -i 's|^CXXFLAGS ?= .*|CXXFLAGS ?= %{optflags}|' sdlwidgets/Makefile \
   src/Makefile
 sed -i 's|data = ./data|data = %{_datadir}/%{name}|' woprc
